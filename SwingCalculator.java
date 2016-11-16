@@ -1,38 +1,39 @@
-        import java.awt.*;
-    import java.awt.event.*;
-    import javax.swing.*;
-    import javax.swing.event.*;
-     
-    class Calculator extends JFrame {
-        private final Font BIGGER_FONT = new Font("monspaced",Font.PLAIN, 20);
+import java.io.*;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.event.*;
+class Calculator extends JFrame 
+    {
+        private final Font BIGGER_FONT = new Font("arieal",Font.PLAIN, 20);
         private JTextField textfield;
         private boolean number = true;
         private String equalOp = "=";
         private CalculatorOp op = new CalculatorOp();
-        
-        public Calculator() {
+        public Calculator()
+         {
             textfield = new JTextField("", 12);
             textfield.setHorizontalAlignment(JTextField.RIGHT);
             textfield.setFont(BIGGER_FONT);
             ActionListener numberListener = new NumberListener();
-            String buttonOrder = "1234567890 ";
+            String buttonOrder = "0123456789";
             JPanel buttonPanel = new JPanel();
             buttonPanel.setLayout(new GridLayout(4, 4, 4, 4));
-            for (int i = 0; i < buttonOrder.length(); i++) {
+            for (int i = 0; i < buttonOrder.length(); i++) 
+            {
                 String key = buttonOrder.substring(i, i+1);
-                if (key.equals(" ")) {
-                    buttonPanel.add(new JLabel(""));
-                } else {
+                if (key.equals(" ")) 
+                {buttonPanel.add(new JLabel(""));} else {
                     JButton button = new JButton(key);
                     button.addActionListener(numberListener);
                     button.setFont(BIGGER_FONT);
                     buttonPanel.add(button);
-                }
+                                                        }
             }
             ActionListener operatorListener = new OperatorListener();
             JPanel panel = new JPanel();
             panel.setLayout(new GridLayout(4, 4, 4, 4));
-            String[] opOrder = {"+", "-", "*", "/","=","C","sin","cos","log"};
+			String[] opOrder = {"+", "-", "*", "/","=","C","sin","cos","log"};
             for (int i = 0; i < opOrder.length; i++) {
                 JButton button = new JButton(opOrder[i]);
                 button.addActionListener(operatorListener);
@@ -41,9 +42,9 @@
             }
             JPanel pan = new JPanel();
             pan.setLayout(new BorderLayout(4, 4));
-            pan.add(textfield, BorderLayout.NORTH );
-            pan.add(buttonPanel , BorderLayout.CENTER);
-            pan.add(panel , BorderLayout.EAST);
+            pan.add(textfield,BorderLayout.NORTH );
+            pan.add(buttonPanel,BorderLayout.CENTER);
+            pan.add(panel,BorderLayout.EAST);
             this.setContentPane(pan);
             this.pack();
             this.setTitle("Calculator");
@@ -66,27 +67,22 @@
                 if (e.getActionCommand().equals("cos"))
                 {
                     textfield.setText("" + Math.cos(Double.valueOf(displayText).doubleValue()));
-                    
                 }
                 else
                 if (e.getActionCommand().equals("log"))
                 {
                     textfield.setText("" + Math.log(Double.valueOf(displayText).doubleValue()));
-                    
                 }
                 else if (e.getActionCommand().equals("C"))
                 {
                     textfield.setText("");
                 }
-     
-                else
+     			else
                 {
                     if (number)
                     {
-                        
                         action();
                         textfield.setText("");
-                        
                     }
                     else
                     {
@@ -111,7 +107,6 @@
                         {
                             op.divide(displayText);
                         }
-                        
                         textfield.setText("" + op.getTotalString());
                         equalOp = e.getActionCommand();
                     }
@@ -129,7 +124,8 @@
                 }
             }
         }
-        public class CalculatorOp {
+        public class CalculatorOp 
+        {
             private int total;
             public CalculatorOp() {
                 total = 0;
@@ -162,5 +158,5 @@
             JFrame frame = new Calculator();
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setVisible(true);
-        }
-    }
+       										   }
+    					  }
